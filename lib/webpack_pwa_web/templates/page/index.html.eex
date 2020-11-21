@@ -1,0 +1,26 @@
+
+
+<section>
+<h1 id="item" item-count="111">All Items</h1>
+<articel>
+   <h2 id="phx-hero" item-count="222"><strong id="itemcount"></strong> Items</h2>
+
+    <table>
+  <thead>
+    <tr>
+      <th>Item</th>
+      <th>Name</th>
+      <th>Detail</th>
+      <th class="float-right">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+
+  </tbody>
+</table>
+
+<button id="addrandombutton">Add Random Item</button>
+<button id="deleteallbutton" class="button-outline">Delete All Items</button>
+</articel>
+  
+</section>
