@@ -2,9 +2,17 @@ defmodule WebpackPwaWeb.ItemCountChannel do
   use WebpackPwaWeb, :channel
 
   @impl true
-  def join("item_count:lobby", _payload, socket) do
+  def join("item_count:total", _payload, socket) do
        {:ok, socket}
   end
+
+ # Handles the published total amount of all items in the fljota.network
+  @impl true
+  def handle_in("total", payload, socket) do
+    broadcast!(socket, "total", payload)
+    {:reply, {:ok, payload}, socket}
+  end
+
 
   # Channels can be used in a request/response fashion
   # by sending replies to requests from the client

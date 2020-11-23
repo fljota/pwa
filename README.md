@@ -13,6 +13,12 @@ Sometimes you can catch a first impression on 'http://nightly.fljota.network' or
 
 ## Prototyping Release Notes
 
+0.1.6
+- Counting all Items from local item inventory and publish total amount in the network
+- Dummy channel.push and channel.on events
+- fake counting without substraction
+- Bug: Channel addition in Frontend
+
 0.1.5
 - Fixed URLs for Demo System
 - Experimental Google Cloud micro VM Deploy Tutorial

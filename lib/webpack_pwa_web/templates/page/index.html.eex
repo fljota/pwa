@@ -1,9 +1,9 @@
 
 
 <section>
-<h1 id="item" item-count="111">All Items</h1>
+<h1 id="item" item-count=""><strong id="totalitemcount"></strong> Items in network</h1>
 <articel>
-   <h2 id="phx-hero" item-count="222"><strong id="itemcount"></strong> Items</h2>
+   <h2 id="phx-hero" item-count="222"><strong id="itemcount"></strong> Items in inventory</h2>
 
     <table>
   <thead>
