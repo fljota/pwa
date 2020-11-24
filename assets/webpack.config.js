@@ -76,11 +76,14 @@ module.exports = (env, options) => {
         // Do not precache images
         exclude: [/\.(?:png|jpg|jpeg|svg)$/],
   
+        // globPatterns: [
+        //   '**/*.{html,json,js,css}',
+        // ],
         // Define runtime caching rules.
         runtimeCaching: [{
           // Match any request that ends with .png, .jpg, .jpeg or .svg.
           urlPattern: /\.(?:png|jpg|jpeg|svg)$/,
-  
+ 
           // Apply a cache-first strategy.
           handler: 'CacheFirst',
   
@@ -95,7 +98,7 @@ module.exports = (env, options) => {
           },
           
         }],
-        navigateFallback: '/offline.html',
+        navigateFallback: "/index.html",
       })
       // ,
       // new InjectManifest({

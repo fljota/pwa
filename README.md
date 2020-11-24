@@ -13,6 +13,10 @@ Sometimes you can catch a first impression on 'http://nightly.fljota.network' or
 
 ## Prototyping Release Notes
 
+0.1.7
+- quick fix service-worker Promise Error with GenerateSW
+- Todo: index caching for offline usage
+
 0.1.6
 - Counting all Items from local item inventory and publish total amount in the network
 - Dummy channel.push and channel.on events
