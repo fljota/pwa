@@ -21,6 +21,7 @@
 
 <button id="addrandombutton">Add Random Item</button>
 <button id="deleteallbutton" class="button-outline">Delete All Items</button>
+<button id="sensorpush" class="button-clear">Shout Sensor</button>
 </articel>
   
 </section>

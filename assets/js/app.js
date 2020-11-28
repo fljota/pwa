@@ -65,7 +65,7 @@ navigator.permissions.query({ name: "gyroscope" })])
 
 //  deviceMarker();
 
-const options = { frequency: 50, referenceFrame: 'device' };
+const options = { frequency: 10, referenceFrame: 'device' };
 const sensor = new AbsoluteOrientationSensor(options);
 
 let demoOutput = [];
@@ -80,9 +80,13 @@ sensor.addEventListener('reading', () => {
   let tempOutput = [sensordatatemp[0], sensordatatemp[1], sensordatatemp[2], sensordatatemp[3]];
 
 
-  if (demoOutput.length < 500) {
+  if (demoOutput.length < 100) {
+    // Pushes 100 Array Quaternions to demoOutput
     demoOutput.push(tempOutput);
-    console.log(demoOutput);
+  }
+  else if (demoOutput.length == 100) {
+    document.getElementById("sensorpush").classList.remove("button-clear")
+    document.getElementById("sensorpush").classList.add("button-outline")
   }
   // localStorage.setItem("sensorQuaternion", sensordatatemp);
 
@@ -106,6 +110,18 @@ sensor.addEventListener('reading', () => {
   //       displayModeBar: false
   //   }]);
   // }
+});
+
+// Adds Sensor Broadcast Button for 100 Quaternions
+document.getElementById("sensorpush").addEventListener("click", function () {
+  if (demoOutput.length == 100) {
+    console.info(demoOutput);
+  }
+
+// TODO: Nice Toggle for Sensordate and Button Inactivation
+  demoOutput = []
+  document.getElementById("sensorpush").classList.remove("button-outline")
+  document.getElementById("sensorpush").classList.add("button-clear")
 });
 
 sensor.start();
