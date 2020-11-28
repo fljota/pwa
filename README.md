@@ -13,6 +13,12 @@ Sometimes you can catch a first impression on 'http://nightly.fljota.network' or
 
 ## Prototyping Release Notes
 
+0.1.8
+- Solved SSL issues on nightly.fljota.network
+- Edited 10Hz Sensor Quaternation sensorX, sensorY, sensorZ & sensorW
+- collecting 100 Sensor Datapoints in demoArray
+- activates 'Shout Sensor' Button if demoArray filled and restarts capturing
+
 0.1.7
 - quick fix service-worker Promise Error with GenerateSW
 - Todo: index caching for offline usage
