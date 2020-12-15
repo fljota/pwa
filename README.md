@@ -14,6 +14,11 @@ Sometimes you can catch a first impression on 'http://nightly.fljota.network' or
 ## Prototyping Release Notes
 
 0.1.12
+- Permission API added to sensor reading
+- returns sensor and demoData null if sensor nA
+- cleaned up code in sensro ES Modul
+
+0.1.12
 - refactored sensors ES Module and sensor init
 - sensor data to 100 datapoint array
 - live sensor quaternion in localstorage

@@ -43,11 +43,10 @@ document.getElementById("deleteallbutton").addEventListener("click", () => {
 // render all existing items from indexedDB on Startup
 cleanUpdate(localitems);
 
-// Starts smartphone Sensors and handles Erros 
-// sensor.start();
-// sensor.onerror = event => console.log(event.error.name, event.error.message);
-sensor.start();
-sensor.onerror = event => console.log(event.error.name, event.error.message);
+// Starts smartphone Sensors and handles Errors
+// TODO refactor permission from ES Module to app.js &
+// map live sensordata to dodecahedron
+
 
 // Load Dummy Sensor Data in localstorage
 if (!localStorage.getItem("sensorQuaternion")) {
