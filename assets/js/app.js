@@ -11,7 +11,7 @@ import 'phoenix_html';
 import Localbase from 'localbase';
 import { addItem, deleteAll, cleanUpdate } from './itemsprototype';
 import { animate } from './dodecahedron';
-// import socket from './socket';
+import socket from './socket';
 // import Item from './itemchannel';
 import { sensor } from './sensors';
 

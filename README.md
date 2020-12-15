@@ -13,7 +13,11 @@ Sometimes you can catch a first impression on 'http://nightly.fljota.network' or
 
 ## Prototyping Release Notes
 
-0.1.12
+0.1.14
+- activated socket publishing for icons
+- cleaned up cod in socket ES Mosul
+
+0.1.13
 - Permission API added to sensor reading
 - returns sensor and demoData null if sensor nA
 - cleaned up code in sensro ES Modul
