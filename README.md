@@ -13,6 +13,11 @@ Sometimes you can catch a first impression on 'http://nightly.fljota.network' or
 
 ## Prototyping Release Notes
 
+0.1.11
+- refactored dodecahedron ES Module and rendering in DOM
+- deleted unneeded code
+- restructured imports
+
 0.1.10
 - refactored arrow functions in app and itemsprototype
 - deleted plotly demo code because it's not needed any more

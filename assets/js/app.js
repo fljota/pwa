@@ -3,29 +3,25 @@
 // its own CSS file.
 import "../css/app.scss"
 
-// webpack automatically bundles all modules in your
-// entry points. Those entry points can be configured
-// in "webpack.config.js".
-//
-// Import deps with the dep name or local files with a relative path, for example:
-//
-//     import {Socket} from "phoenix"
-//     import socket from "./socket"
-//
-import "phoenix_html";
+// webpack automatically bundles all ES modules in the entry points. 
+// Those entry points can be configured in "webpack.config.js".
+// You don't need to insert the .js ending.
+
+import 'phoenix_html';
 import Localbase from 'localbase';
 import { addItem, deleteAll, cleanUpdate } from './itemsprototype';
-import socket from "./socket";
+import { animate } from './dodecahedron';
+// import socket from './socket';
 // import Item from './itemchannel';
-
-// TODO Import Dodecahedron for Sensor Rendering
-// import { animate, renderer } from './dodecahedron';
-// renderer.setSize(500, 500);
-// document.body.appendChild(renderer.domElement);
+// import { sensor } from './sensors.js';
 
 const debugvar = true;
 
 var localitems = new Localbase('iteminventory')
+
+// Renders Dodecahedron Animation
+// TODO generate fallbacks with animation true/false and sensormapping
+animate();
 
 // Debugung indexedDB Console Logs
 if (debugvar) {
@@ -64,8 +60,6 @@ navigator.permissions.query({ name: "gyroscope" })])
       console.log("No permissions to use AbsoluteOrientationSensor.");
     }
   });
-
-//  deviceMarker();
 
 const options = { frequency: 10, referenceFrame: 'device' };
 const sensor = new AbsoluteOrientationSensor(options);
