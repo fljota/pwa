@@ -13,6 +13,12 @@ Sometimes you can catch a first impression on 'http://nightly.fljota.network' or
 
 ## Prototyping Release Notes
 
+0.1.10
+- refactored arrow functions in app and itemsprototype
+- deleted plotly demo code because it's not needed any more
+- edited Tutorial infos
+- verbose logging in items
+
 0.1.9
 - added dodecahedron ES Module for Rendering 3D model in frontend
 - TODOs for code refactoring in ES Modules
@@ -74,6 +80,9 @@ Download the self-contained directory that includes the Erlang VM, Elixir, all f
 `_build/prod/rel/*pwa*/bin/*pwa* start`
 
 ## How to install fljota.pwa on your rpi4 ubuntu 20.04 for local experiments (the nerdy way)?
+
+0. Make shure to bring your system to the latest version
+`sudo apt update && sudo apt upgrade`
 
 1. Check your Ubuntu Version
 `lsb_release -d`

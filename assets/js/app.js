@@ -35,12 +35,12 @@ if (debugvar) {
 // TODO Check Routes and filter js actions.
 
 // Adds one random floating item to localitem indexedDB on Button Click
-document.getElementById("addrandombutton").addEventListener("click", function () {
+document.getElementById("addrandombutton").addEventListener("click", () => {
   addItem(localitems, 999);
 });
 
 // Adds delete Button for cleaning all indexedDB items with one Click
-document.getElementById("deleteallbutton").addEventListener("click", function () {
+document.getElementById("deleteallbutton").addEventListener("click", () => {
   deleteAll(localitems);
 });
 
@@ -50,9 +50,6 @@ cleanUpdate(localitems);
 // TODO Separate SensorQuaternion from here in separate js file 
 
 // All about Sensors : https://developers.google.com/web/updates/2017/09/sensors-for-the-web
-
-// import deviceMarker from "./plotly"
-// import { deviceMarker, reactChart } from './plotly';
 
 const sensor2 = new AbsoluteOrientationSensor();
 Promise.all([navigator.permissions.query({ name: "accelerometer" }),
@@ -93,32 +90,10 @@ sensor.addEventListener('reading', () => {
     document.getElementById("sensorpush").classList.remove("button-clear")
     document.getElementById("sensorpush").classList.add("button-outline")
   }
-  // localStorage.setItem("sensorQuaternion", sensordatatemp);
-
-  // deviceMarker();
-  // reactChart();
-  // Plotly.newPlot('demoline', trace2);
-  // if(i>0) {
-  // Plotly.react('demoline', [{
-  //     type: 'scatter3d',
-  //     mode: 'markers',
-  //     x: sensordatatemp[0],
-  //     y: sensordatatemp[1],
-  //     z: sensordatatemp[2],
-  //     line: {
-  //       width: 3,
-  //       colorscale: "Viridis"}
-  //    },                  
-  //   ],[{
-  //       showlegend: false
-  //   }],[{
-  //       displayModeBar: false
-  //   }]);
-  // }
 });
 
 // Adds Sensor Broadcast Button for 100 Quaternions
-document.getElementById("sensorpush").addEventListener("click", function () {
+document.getElementById("sensorpush").addEventListener("click", () => {
   if (demoOutput.length == 100) {
     console.info(demoOutput);
   }

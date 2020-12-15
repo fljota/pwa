@@ -1,4 +1,4 @@
-function addItem(localitems, iid) {
+let addItem = (localitems, iid) => {
   let did = getRandomInt(iid);
   let dco = getRandomColor();
   let dfj = getRandomFljota();
@@ -7,20 +7,18 @@ function addItem(localitems, iid) {
     item: dco,
     detail: dfj
   })
-
   // TODO Optimize Promisse Call
   updateNumber(localitems);
-
-  // console.log(`Floating Item ${did} created in indexed DB.`);
+  console.log(`Floating Item ${did} created in indexed DB.`);
 }
 
-function updateNumber(localitems) {
+let updateNumber = (localitems) => {
   return localitems.collection('items').get().then(items => {
     cleanUpdate( localitems, (typeof items.length == 'number') ? items.length : '100');
    });
 }
 
-function cleanUpdate(localitems) {
+let cleanUpdate = (localitems) => {
   
   localitems.collection('items').get().then(items => {
     document.getElementById('itemcount').innerText = items.length;
@@ -29,18 +27,18 @@ function cleanUpdate(localitems) {
       let newitem = ('<tr id="line' + element.id + '"><td>' + element.id + "</td><td>" + element.item + "</td><td>" + element.detail + '</td><td class="float-right"><button class="button button-outline" id="deletebutton' + element.id + '">' + element.id + ' Delete</button></td></tr>');
       document.getElementsByTagName("tbody")[0].insertAdjacentHTML('beforeend',newitem);
 
-      document.getElementById("deletebutton" + element.id).addEventListener("click", function () {
+      document.getElementById("deletebutton" + element.id).addEventListener("click",  () => {
         deleteItem(localitems, element.id);
       });
     });
   });
 }
 
-function getRandomInt(max) {
+let getRandomInt = (max) => {
   return Math.floor(Math.random() * Math.floor(max));
 }
 
-function getRandomColor() {
+let getRandomColor = () => {
   var letters = '0123456789ABCDEF';
   var color = '#';
   for (var i = 0; i < 6; i++) {
@@ -49,7 +47,7 @@ function getRandomColor() {
   return color;
 }
 
-function getRandomFljota() {
+let getRandomFljota = () => {
   var value = 'ABC';
   var ft = 'ﬅ';
   for (var i = 0; i < 1; i++) {
@@ -58,7 +56,7 @@ function getRandomFljota() {
   return ft;
 }
 
-function deleteAll(localitems) {
+let deleteAll = (localitems) => {
   localitems.collection('items').delete();
   document.getElementsByTagName("tbody")[0].innerHTML = '';
   updateNumber(localitems);
@@ -67,7 +65,7 @@ function deleteAll(localitems) {
   return true
 }
 
-function deleteItem(localitems, lid) {
+let deleteItem = (localitems, lid) => {
   localitems.collection("items").doc({ id: lid }).delete();
   document.getElementById('line'+lid).remove();
   // TODO Fix ItemCount after Item Remove while not updating full cleanUpdate
