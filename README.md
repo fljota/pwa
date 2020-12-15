@@ -13,6 +13,12 @@ Sometimes you can catch a first impression on 'http://nightly.fljota.network' or
 
 ## Prototyping Release Notes
 
+0.1.12
+- refactored sensors ES Module and sensor init
+- sensor data to 100 datapoint array
+- live sensor quaternion in localstorage
+- TODO: Permission API for Desktop Uncaught ReferenceError: AbsoluteOrientationSensor is not defined 
+
 0.1.11
 - refactored dodecahedron ES Module and rendering in DOM
 - deleted unneeded code
