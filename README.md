@@ -13,6 +13,10 @@ Sometimes you can catch a first impression on 'http://nightly.fljota.network' or
 
 ## Prototyping Release Notes
 
+0.1.9
+- added dodecahedron ES Module for Rendering 3D model in frontend
+- TODOs for code refactoring in ES Modules
+
 0.1.8
 - Solved SSL issues on nightly.fljota.network
 - Edited 10Hz Sensor Quaternation sensorX, sensorY, sensorZ & sensorW

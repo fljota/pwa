@@ -18,6 +18,11 @@ import { addItem, deleteAll, cleanUpdate } from './itemsprototype';
 import socket from "./socket";
 // import Item from './itemchannel';
 
+// TODO Import Dodecahedron for Sensor Rendering
+// import { animate, renderer } from './dodecahedron';
+// renderer.setSize(500, 500);
+// document.body.appendChild(renderer.domElement);
+
 const debugvar = true;
 
 var localitems = new Localbase('iteminventory')
