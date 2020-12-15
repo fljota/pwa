@@ -24,7 +24,7 @@ let cleanUpdate = (localitems) => {
     document.getElementById('itemcount').innerText = items.length;
     document.getElementsByTagName("tbody")[0].innerHTML = '';
     items.forEach(element => {
-      let newitem = ('<tr id="line' + element.id + '"><td>' + element.id + "</td><td>" + element.item + "</td><td>" + element.detail + '</td><td class="float-right"><button class="button button-outline" id="deletebutton' + element.id + '">' + element.id + ' Delete</button></td></tr>');
+      let newitem = ('<tr id="line' + element.id + '"><td><svg height="50" width="50"><circle cx="25" cy="25" r="24"  fill="' + element.item + '" />' + element.item + "</svg></td><td>" + element.id + "</td><td>" + element.detail + '</td><td><button class="button button-outline" id="deletebutton' + element.id + '">' + element.id + ' Delete</button></td></tr>');
       document.getElementsByTagName("tbody")[0].insertAdjacentHTML('beforeend',newitem);
 
       document.getElementById("deletebutton" + element.id).addEventListener("click",  () => {

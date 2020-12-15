@@ -13,6 +13,11 @@ Sometimes you can catch a first impression on 'http://nightly.fljota.network' or
 
 ## Prototyping Release Notes
 
+0.1.15
+- added gsap module
+- dummy sticky footer navigation with toggle menu
+- colored demo items in item inventory
+
 0.1.14
 - activated socket publishing for icons
 - cleaned up cod in socket ES Mosul

@@ -51,5 +51,20 @@ if ('serviceWorker' in navigator) {
      | 
           
     </footer>
+
+    <div id="footerdemo">
+        <img class="activator" id="activator" src="//s.svgbox.net/hero-outline.svg?fill=fff#menu-alt-1" alt="">
+        <nav>
+            <ul>
+                <li><a href="#"><img src="//s.svgbox.net/hero-outline.svg?fill=805ad5#bell"></a></li>
+                <li><a href="#"><img src="//s.svgbox.net/hero-outline.svg?fill=805ad5#beaker"></a></li>
+                <li><a href="#"><img src="//s.svgbox.net/hero-outline.svg?fill=805ad5#chat"></a></li>
+                <li><a href="#"><img src="//s.svgbox.net/hero-outline.svg?fill=805ad5#cloud-download"></a></li>
+                <li><a href="#"><img src="//s.svgbox.net/hero-outline.svg?fill=805ad5#cog"></a></li>
+            </ul>
+        </nav>
+    </div>
+
+
   </body>
 </html>

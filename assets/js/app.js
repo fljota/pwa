@@ -8,6 +8,7 @@ import "../css/app.scss"
 // You don't need to insert the .js ending.
 
 import 'phoenix_html';
+import { gsap } from 'gsap';
 import Localbase from 'localbase';
 import { addItem, deleteAll, cleanUpdate } from './itemsprototype';
 import { animate } from './dodecahedron';
@@ -55,3 +56,26 @@ if (!localStorage.getItem("sensorQuaternion")) {
   localStorage.setItem("sensorY", Math.random());
   localStorage.setItem("sensorZ", Math.random());
 }
+
+let tl = gsap.timeline({defaults: {ease: "power2.inOut"}})
+
+let toggle = false;
+
+tl.to('.activator', {
+    background: '#805ad5',
+    'borderRadius': '5em 0 0 5em'
+});
+tl.to('nav', {
+    'clipPath': 'ellipse(100% 100% at 50% 50%)'
+}, "-=.5")
+tl.to('nav img', {
+    opacity: 1,
+    transform: 'translateX(0)',
+    stagger: .05
+}, "-=.5")
+tl.pause();
+
+document.getElementById("activator").addEventListener('click', () => {
+    toggle = !toggle;
+    if (toggle ? tl.play() : tl.reverse());
+})

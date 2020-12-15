@@ -11,7 +11,7 @@
       <th>Item</th>
       <th>Name</th>
       <th>Detail</th>
-      <th class="float-right">Action</th>
+      <th>Action</th>
     </tr>
   </thead>
   <tbody>
@@ -23,5 +23,5 @@
 <button id="deleteallbutton" class="button-outline">Delete All Items</button>
 <button id="sensorpush" class="button-clear">Shout Sensor</button>
 </articel>
-  
+ 
 </section>
