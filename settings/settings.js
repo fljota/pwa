@@ -13,6 +13,8 @@ document.querySelector('#app').innerHTML = `
     <h1>Settings</h1>
     <div>
       <h1>PWA Einstellungen</h1>
+      <button id="checkServiceWorkerPushManager">Service Worker und Push Manager prüfen</button>
+      <button id="checkPushPermission">Push-Benachrichtigungen prüfen</button>
       <button id="subscribe">Subscribe to Push Notifications</button>
       <button id="installPWA" style="display: none;">App installieren</button>
       <div>
@@ -195,4 +197,35 @@ function showToast(message) {
   }, 5000);
 }
 
+// Push-Benachrichtigungen im Device manuell überprüfen.
+function checkPushNotificationPermission() {
+  if (!('Notification' in window)) {
+    showToast('Dieser Browser unterstützt keine Push-Benachrichtigungen');
+    return;
+  }
 
+  Notification.requestPermission().then((permission) => {
+    if (permission === 'granted') {
+      showToast('Push-Benachrichtigungen sind erlaubt');
+    } else if (permission === 'denied') {
+      showToast('Push-Benachrichtigungen wurden abgelehnt');
+    } else {
+      showToast('Push-Benachrichtigungen wurden noch nicht festgelegt');
+    }
+  });
+}
+
+// Event-Listener für den neuen Button hinzufügen
+document.getElementById('checkPushPermission').addEventListener('click', checkPushNotificationPermission);
+
+// Neue Funktion zum Überprüfen des Service Workers und Push Managers
+function checkServiceWorkerAndPushManager() {
+  if ('serviceWorker' in navigator && 'PushManager' in window) {
+    showToast('Service Worker und Push Manager sind verfügbar');
+  } else {
+    showToast('Service Worker oder Push Manager sind nicht verfügbar');
+  }
+}
+
+// Event-Listener für den neuen Button hinzufügen
+document.getElementById('checkServiceWorkerPushManager').addEventListener('click', checkServiceWorkerAndPushManager);
