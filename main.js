@@ -52,8 +52,12 @@ document.querySelector('#app').innerHTML = `
     <label for="nameField">Item Bezeichnung</label>
     <input type="text" placeholder="Dies und Das" id="nameField">
 
-    <label for="captureInput">Capture Image</label>
+    <label for="captureInput" class="custom-file-upload">
+    <img src="/assets/camera-retro-thin.svg" alt="Capture Image" height="36" style="margin:5px;" />
+    Bild erstellen / hochladen
+    </label>
     <input type="file" accept="image/*" capture="environment" id="captureInput">
+   
     <br />
     <canvas id="previewCanvas" width="128" height="128"></canvas>
 
