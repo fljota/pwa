@@ -1,0 +1,489 @@
+:root {
+  font-family: Roboto, Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  font-weight: lighter;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+
+a:hover {
+  color: #535bf2;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+#app {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.logo {
+  height: 16em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+
+.logo.vanilla:hover {
+  filter: drop-shadow(0 0 2em #f7df1eaa);
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+/* button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+button:hover {
+  border-color: #646cff;
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+} */
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+
+  a:hover {
+    color: #747bff;
+  }
+
+  /* button {
+    background-color: #f9f9f9;
+  } */
+}
+
+body {
+  margin: 0px;
+  margin-left: 130px;
+  margin-bottom: 130px;
+  padding: 0px;
+}
+
+.notification {
+  display: none;
+  /* Standardmäßig versteckt */
+  height: 10px;
+  width: 10px;
+  background-color: red;
+  /* Farbe des Benachrichtigungskreises */
+  border-radius: 50%;
+  z-index: 10;
+  position: relative;
+  top: -60px;
+  right: -30px;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.4);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100px;
+  /* min-width: 480px; */
+  height: 100%;
+  /* 232966 */
+  background: linear-gradient(to right, #ffffff, #e7e7e7);
+  color: #4c4c4c;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: space-around; */
+  padding: 10px 0;
+  border-top: 1px solid gray;
+  z-index:1000;
+
+
+}
+
+/* Media Query fÃ¼r Tablets */
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+
+  body {
+    margin: 15px;
+    margin-bottom: 30px;
+    padding: 0px;
+  }
+
+  .navbar {
+    position: fixed;
+    top: auto;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    /* min-width: 480px; */
+    height: 140px;
+    /* 232966 */
+    background: linear-gradient(to right, #ffffff, #e7e7e7);
+    color: #2f2f2f;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 10px 0;
+  }
+}
+
+/* Media Query fÃ¼r MobilgerÃ¤te */
+@media only screen and (max-width: 767px) {
+
+  body {
+    margin: 15px;
+    margin-bottom: 30px;
+    padding: 0px;
+  }
+
+  .navbar {
+    position: fixed;
+    top: auto;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    /* min-width: 480px; */
+    height: 100px;
+    /* 232966 */
+    background: linear-gradient(to right, #ffffff, #e7e7e7);
+    color: #535353;
+    display: flex;
+    flex-direction: row;
+    /* justify-content: space-around; */
+    padding: 10px 0;
+    z-index: 3;
+  }
+
+  .navbar a {
+    text-decoration: none;
+    color: #888888;
+    /* font-weight: bold; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+  }
+}
+
+.navbar a {
+  text-decoration: none;
+  color: #474747;
+  /* font-weight: bold; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px;
+  font-weight: lighter;
+  /* text-transform: uppercase; */
+}
+
+.navbar a i {
+  font-size: 20px;
+  margin-bottom: 5px;
+}
+
+.navbar a:hover {
+  text-decoration: none;
+  /* filter: drop-shadow(0 0 2em #646cffaa); */
+}
+
+.filter {
+  filter: blur(3.5px);
+}
+
+.content {
+  margin: 15px;
+}
+
+#card a {
+  position: relative;
+  /* Setzt den Bezugspunkt für die absolut positionierten Kindelemente */
+  display: inline-block;
+
+}
+
+#card img {
+  border-radius: 50%;
+  margin:5px;
+  filter: drop-shadow(0 0 1em #646cffaa);
+}
+
+
+#card a div {
+  position: absolute;
+  /* Ermöglicht die freie Positionierung innerhalb des .image-wrapper-Elements */
+  top: 0px;
+  /* Positioniert das Div am oberen Rand des a-Elements */
+  right: 0;
+  /* Positioniert das Div am linken Rand des a-Elements */
+  /* width: 100%; */
+  /* Stellt sicher, dass das Div die volle Breite des a-Elements einnimmt */
+  /* height: 38px; */
+  color: white;
+  font-size: 10px;
+  background-color: #045900;
+  border-radius: 10px;
+  padding:3px;
+}
+
+button {
+  z-index: 3;
+}
+
+.button-large {
+  font-size: 1.5rem;
+  height: 4.8rem;
+  line-height: 4.5rem;
+  padding: 0 2rem;
+}
+
+/* here we customize the transition, these are the shared styles for the old and new view*/
+::view-transition-new(root),
+::view-transition-old(root) {
+  animation-duration: 300ms;
+  animation-timing-function: ease-out;
+  animation-direction: normal;
+}
+
+/* old view slides out to the left */
+::view-transition-old(root) {
+  animation-name: slide-out;
+}
+
+/* new view slides in from the right */
+::view-transition-new(root) {
+  animation-name: slide-in;
+  mix-blend-mode: normal;
+}
+
+/* class "back-transition" is added to the html element 
+ * to customize the back transition 
+ * new view
+ */
+.back-transition::view-transition-new(root) {
+  animation-name: slide-out-reverse;
+}
+
+/* customized back transition for old view */
+.back-transition::view-transition-old(root) {
+  animation-name: slide-in-reverse;
+  mix-blend-mode: normal;
+  z-index: 1;
+}
+
+@keyframes slide-out {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-20%);
+  }
+}
+
+@keyframes slide-out-reverse {
+  from {
+    transform: translateX(-20%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-in {
+  from {
+    transform: translateX(100%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-in-reverse {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(100%);
+  }
+}
+
+/* Verstecke den ursprünglichen File-Input */
+input[type="file"] {
+  display: none;
+}
+
+/* Styles für das Label, das als Ersatz für den File-Input dient */
+.custom-file-upload {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  background-color: #ffffff;
+  padding: 10px;
+  border-radius: 4px;
+  border: 2px solid #9b4dca;
+  color: #9b4dca;
+  font-size: 16px;
+}
+
+/* Optional: Hover-Effekt */
+.custom-file-upload:hover {
+  background-color: #e0e0e0;
+}
+
+#step1 {
+  background-color: lightgray;
+  height: 100vh;
+  scroll-snap-type: y mandatory;
+
+  display: flex;
+  flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   padding: 20px;
+  
+}
+
+#step2 {
+  background-color: #eeeeee;
+  height: 100vh;
+  scroll-snap-type: y mandatory;
+
+
+  display: flex;
+  flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   padding: 20px;
+  
+}
+
+#step3 {
+  background-color: lightgray;
+  height: 100vh;
+  scroll-snap-type: y mandatory;
+
+  display: flex;
+  flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   padding: 20px;
+  
+}
+
+#details, #return {
+  background-color: #eeeeee;
+  height: 100vh;
+  scroll-snap-type: y mandatory;
+
+  display: flex;
+  flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   padding: 20px;
+  
+}
+
+#details img {
+  border-radius:50%
+}
+
+#stepper {
+  position:absolute;
+  bottom:0px;
+  right:60px;
+  }
+
+  .toast-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    pointer-events: none;
+}
+
+.toast {
+    background-color: #333;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 4px;
+    margin-top: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+    transform: translateY(-100%);
+    pointer-events: auto;
+}
+
+.toast.show {
+    transform: translateY(0);
+}
+
+@media (max-width: 600px) {
+    .toast {
+        margin: 10px;
+        max-width: calc(100% - 20px);
+    }
+}

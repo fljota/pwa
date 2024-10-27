@@ -1,0 +1,53 @@
+0.3.4
+Items und Contract Abgleich für Contract Liste mit Detail Button.
+Dynamic Link für Sharing Page.
+Bug TBD: keine contractid wenn lender und owner gleich sind.
+Service Worker manuell eingefügt.
+app.fljota.network als PUSH Notification Dienst eingefügt.
+
+
+0.3.3
+Static Files Importe für SVGs gesetzt
+PWA Plugin installiert
+lending Route hinzugefügt
+Stepper divs in lender Logik ergänzt
+Lender eindeutige ID für Items checken, bevor sie gespeichert werden
+Smoothes Scrolingverhalten für scrollIntoView()
+auth0 Integration Basic Setup Dev / Staging configurated
+
+0.3.2
+Websocket handshake auf handshake.fljota.network eingerichtet
+Websocket MSG Handler eingeführt
+
+0.3.1
+Code Bereinigung und Optimierung
+
+0.3.0
+localbase als Middleware für die indexedDB Zugriffe ersetzt
+
+0.2.1
+Clickable Item for Touch Devices optimized.
+Connect Lender Feedback to Owner.
+New handshake.fljota.network API and Websocket for sharing.js
+Logging für API Endpoints.
+Demo Owner and Lender in IndexedDB.
+Return to Owner Button added.
+localbase upgrade from indexedDB.
+TODO: Lock private and public Items.
+
+0.2.0
+Fictional User Naming at index.html
+https://app.fljota.network/api/postItem Routing Check Online
+Sharing Demo optimized.
+Annonymous User for Demo Purposes.
+Navbar Links fixed.
+
+0.1.2
+Sharing Page Optimaization
+
+0.1.1
+Vite Development Environment
+Static Routing for Main Navigation
+
+0.1.0
+MVP Setup
