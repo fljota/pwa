@@ -20,6 +20,7 @@ document.querySelector('#app').innerHTML = `
       <div>
         <label for="userId">Benutzer-ID:</label>
         <input type="text" id="userId" name="userId" readonly>
+        <button id="sendTestMessage">Testnachricht</button>
       </div>
     </div>
     <div>
@@ -229,3 +230,31 @@ function checkServiceWorkerAndPushManager() {
 
 // Event-Listener für den neuen Button hinzufügen
 document.getElementById('checkServiceWorkerPushManager').addEventListener('click', checkServiceWorkerAndPushManager);
+
+// Neue Funktion zum Senden einer Testnachricht
+function sendTestMessage() {
+  const userId = document.getElementById('userId').value;
+  if (!userId) {
+    showToast('Bitte zuerst eine Benutzer-ID generieren');
+    return;
+  }
+
+  const url = `https://app.fljota.network/sendToUser?userId=${userId}&message=Testversand`;
+
+  fetch(url)
+    .then(response => response.json())
+    .then(data => {
+      if (data.message === "Benachrichtigung gesendet") {
+        showToast('Testnachricht erfolgreich gesendet');
+      } else {
+        showToast('Fehler beim Senden der Testnachricht');
+      }
+    })
+    .catch(error => {
+      console.error('Fehler:', error);
+      showToast('Fehler beim Senden der Testnachricht');
+    });
+}
+
+// Event-Listener für den neuen Button hinzufügen
+document.getElementById('sendTestMessage').addEventListener('click', sendTestMessage);
