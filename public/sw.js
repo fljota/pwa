@@ -1,6 +1,6 @@
-// import { precacheAndRoute } from 'workbox-precaching'
+import { precacheAndRoute } from 'workbox-precaching'
 
-// precacheAndRoute(self.__WB_MANIFEST)
+precacheAndRoute(self.__WB_MANIFEST)
 
 // Event-Listener für Push-Ereignisse
 self.addEventListener('push', function(event) {

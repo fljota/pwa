@@ -4,7 +4,8 @@ Dynamic Link für Sharing Page.
 Bug TBD: keine contractid wenn lender und owner gleich sind.
 Service Worker manuell eingefügt.
 app.fljota.network als PUSH Notification Dienst eingefügt.
-Github Integration eingefügt.
+Github Integration eingefügt
+Manuelle Checks für Dienste in den Settings.
 
 
 0.3.3

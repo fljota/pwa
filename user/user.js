@@ -169,10 +169,10 @@ function setupThreeJS() {
     requestAnimationFrame(animate);
 
     if (useDeviceOrientation) {
-      // Umwandlung der Geräteorientierung in Radiant
-      dodecahedron.rotation.x = deviceBeta * (Math.PI / 180);
-      dodecahedron.rotation.y = deviceGamma * (Math.PI / 180);
-      dodecahedron.rotation.z = deviceAlpha * (Math.PI / 180);
+      // Umwandlung der Geräteorientierung in Radiant und Umkehrung der Richtung
+      dodecahedron.rotation.x = -deviceBeta * (Math.PI / 180);
+      dodecahedron.rotation.y = -deviceGamma * (Math.PI / 180);
+      dodecahedron.rotation.z = -deviceAlpha * (Math.PI / 180);
     } else {
       // Fallback zur automatischen Rotation
       dodecahedron.rotation.x += 0.01;
