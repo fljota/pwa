@@ -83,6 +83,10 @@ document.querySelector('#app').innerHTML = `
 if (localStorage.getItem('annonym') === 'true') {
   document.getElementById("userNotification").style.display = "block";
 }
+if (!localStorage.getItem('userId')) {
+  document.getElementById("settingsNotification").style.display = "block";
+}
+
 
 setupCounter(document.querySelector('#counter'))
 

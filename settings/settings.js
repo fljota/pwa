@@ -34,7 +34,7 @@ document.querySelector('#app').innerHTML = `
       </fieldset>
       <h2>Browserspeicher</h2>
       <p>Es werden <i id="storage">0.0</i> deines Browserspeichers indexedDB genutzt <br />
-        <button id="dumpDB">Datenbank unwiderruflich leeren und App zurücksetzten</button>
+        <button id="dumpDB">Datenbank unwiderruflich leeren<br />und App zurücksetzten</button>
       </p>
     </div>
   </p>
