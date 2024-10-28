@@ -8,8 +8,9 @@ import { sendItemToLender, websocketFeedback } from "/modules/ws_connect.js"
 import { blobToJson, getCurrentDateTime } from '/modules/helper.js'
 
 
-// const urlToAPI = 'localhost:8080';
-const urlToAPI = 'handshake.fljota.network';
+const urlToAPI = 'localhost:8080';
+// const urlToAPI = 'handshake.fljota.network';
+const websocketURL = 'ws://';
 // WSS Support on Plesk only with deactivated Proxy Mode:
 // https://www.plesk.com/kb/support/does-node-js-on-plesk-support-websockets-socket-io/
 
@@ -128,7 +129,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 // WebSocket-Verbindung zu Server herstellen
-const socket = new WebSocket('wss://'+urlToAPI+'?saveID=' + saveId + 'lender');
+const socket = new WebSocket(websocketURL +urlToAPI+'?saveID=' + saveId + 'lender');
 
 // Verbindung erfolgreich hergestellt
 socket.onopen = function () {

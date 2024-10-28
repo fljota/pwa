@@ -10,8 +10,9 @@ import fn_loader from '/assets/fn_loader.svg'
 import undraw_shared_goals from '/assets/undraw_shared_goals.svg'
 
 
-// const urlToAPI = 'localhost:8080';
-const urlToAPI = 'handshake.fljota.network';
+const urlToAPI = 'localhost:8080';
+const websocketURL = 'ws://';
+// const urlToAPI = 'handshake.fljota.network';
 // WSS Support on Plesk only with deactivated Proxy Mode:
 // https://www.plesk.com/kb/support/does-node-js-on-plesk-support-websockets-socket-io/
 
@@ -207,7 +208,7 @@ document.getElementById('push').addEventListener('click', (event) => {
     tempcontractid = shuffledToken;
 
     // WebSocket-Verbindung zu Server herstellen mit temporärer eindeutiger saveID
-    const socket = new WebSocket('wss://' + urlToAPI + '/?saveID=' + shuffledToken);
+    const socket = new WebSocket(websocketURL + urlToAPI + '/?saveID=' + shuffledToken);
 
     // Verbindung erfolgreich hergestellt
     socket.onopen = function () {
