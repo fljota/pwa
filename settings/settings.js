@@ -97,7 +97,7 @@ if (!existingSubscription) {
   //dev-sw.js?dev-sw' für DEV
   // sw.js für PROD
   if ('serviceWorker' in navigator && 'PushManager' in window) {
-    navigator.serviceWorker.register('/sw.js')
+    navigator.serviceWorker.register('/dev-sw.js?dev-sw')
       .then(function (swReg) {
         console.log('Service Worker registriert', swReg);
 

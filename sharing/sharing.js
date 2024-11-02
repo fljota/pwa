@@ -210,6 +210,16 @@ document.getElementById('push').addEventListener('click', (event) => {
     // WebSocket-Verbindung zu Server herstellen mit temporärer eindeutiger saveID
     const socket = new WebSocket(websocketURL + urlToAPI + '/?saveID=' + shuffledToken);
 
+    socket.onerror = function(error) {
+        console.error('WebSocket Fehler:', error);
+        alert('Verbindungsfehler aufgetreten. Bitte versuchen Sie es später erneut.');
+    };
+
+    socket.onclose = function(event) {
+        console.log('WebSocket-Verbindung geschlossen:', event.code, event.reason);
+        document.getElementById('receivedMessage').innerHTML = 'Verbindung unterbrochen. Bitte Seite neu laden.';
+    };
+
     // Verbindung erfolgreich hergestellt
     socket.onopen = function () {
         console.log('Verbindung zu WebSocket-Server hergestellt.');
@@ -217,38 +227,40 @@ document.getElementById('push').addEventListener('click', (event) => {
 
     // Nachricht empfangen (von Client B)
     socket.onmessage = function (event) {
+        try {
+            let jsonObject = JSON.parse(event.data);
+            
+            if (!jsonObject || !jsonObject.type) {
+                throw new Error('Ungültiges Nachrichtenformat');
+            }
 
+            switch(jsonObject.type) {
+                case "lender":
+                    if (!jsonObject.msg) {
+                        throw new Error('Fehlende Lender-Informationen');
+                    }
+                    templenderuser = jsonObject.msg;
+                    document.getElementById('lendername').innerHTML = escapeHtml(jsonObject.msg);
+                    document.getElementById('prepareSharing').disabled = false;
+                    document.getElementById("step2").scrollIntoView({ behavior: 'smooth' });
+                    break;
 
-        let jsonObject = JSON.parse(event.data);
-        // blobToJson(event.data)
-        // .then(jsonObject => {
-        console.log('Nachricht von Client B erhalten:', jsonObject);
+                case "lok":
+                    if (!jsonObject.msg) {
+                        throw new Error('Fehlende LOK-Informationen');
+                    }
+                    templenderId = jsonObject.msg;
+                    document.getElementById('sharingButton').disabled = false;
+                    document.getElementById("step3").scrollIntoView({ behavior: 'smooth' });
+                    break;
 
-        console.log(jsonObject.type);
-
-        if (jsonObject.type === "lender") {
-
-            templenderuser = jsonObject.msg;
-            document.getElementById('receivedMessage').innerHTML += jsonObject.msg;
-            document.getElementById('lendername').innerHTML = jsonObject.msg;
-            document.getElementById('prepareSharing').disabled = false;
-
-            document.getElementById("step2").scrollIntoView({ behavior: 'smooth' })
-
+                default:
+                    console.warn('Unbekannter Nachrichtentyp:', jsonObject.type);
+            }
+        } catch (error) {
+            console.error('Fehler beim Verarbeiten der Nachricht:', error);
+            document.getElementById('receivedMessage').innerHTML = 'Fehler beim Verarbeiten der Daten';
         }
-        else if (jsonObject.type === "lok") {
-            document.getElementById('receivedMessage').innerHTML += `\n<br />` + jsonObject.msg;
-            document.getElementById('receivedMessage').innerHTML += `\n<br />--------------------------------`;
-
-            document.getElementById('sharingButton').disabled = false;
-
-            console.log(document.getElementById('sharingButton').disabled);
-
-            document.getElementById("step3").scrollIntoView({ behavior: 'smooth' })
-
-            templenderId = jsonObject.msg; //lenderId;
-        }
-
     };
 
     document.getElementById('prepareSharing').addEventListener('click', (event) => {
@@ -390,5 +402,14 @@ document.getElementById('returnButton').addEventListener('click', function() {
     //     alert('Es gab einen Fehler beim Abrufen der Item-Informationen.');
     // });
 });
+
+function escapeHtml(unsafe) {
+    return unsafe
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
 
 
