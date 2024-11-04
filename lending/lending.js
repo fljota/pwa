@@ -19,6 +19,7 @@ const lengthOfToken = 4;
 let urlParams = new URLSearchParams(window.location.search);
 let itemId = urlParams.get('id');
 let saveId = urlParams.get('saveID');
+let returnId = urlParams.get('returnId');
 
 if (saveId) {
     localStorage.setItem('tempSaveId', saveId);
@@ -26,7 +27,7 @@ if (saveId) {
 }
 
 
-if (itemId) {
+if (itemId || returnId) {
 
     document.querySelector('#app').innerHTML = `<a href="index.html"><img src="/fljota_offline.svg" style="width:64px; height:64px;" alt="fljota.network"></a>
 <div id="itemDetails">
@@ -48,6 +49,11 @@ if (itemId) {
     <pre id="messages"></pre>
     <div id="item"></div>
 
+</div>
+<div id="returnstep1">
+<h1>Item zurückgeben</h1>
+<p>Hier kannst du das Item zurückgeben.</p>
+<button id="return1">Item zurückgeben</button>
 </div>
 
 <dialog>
@@ -138,6 +144,28 @@ socket.onopen = function () {
 
 let tempitemtosave = [];
 
+if (returnId) {
+    document.getElementById('returnstep1').scrollIntoView({ behavior: 'smooth' });
+    document.getElementById('return1').addEventListener('click', () => {
+        db.collection('items').get().then(items => {
+            let itemWithContract = items.find(item => item.contract === returnId);
+            console.log('Gefundenes Item mit Contract:', itemWithContract);
+            
+            // Korrigierte Version: Verwende itemWithContract statt undefiniertes 'item'
+            const socketreturn = new WebSocket(websocketURL + urlToAPI + '?saveID=' + itemWithContract.contract + 'lender');
+
+            socketreturn.onopen = function () {
+                console.log('Verbindung zu WebSocket-Server hergestellt.');
+                // Sende die Nachricht erst, wenn die Verbindung hergestellt ist
+                socketreturn.send(JSON.stringify({
+                    targetId: itemWithContract.contract,
+                    type: 'return',
+                    msg: itemWithContract.contract
+                }));
+            };
+        });
+    });
+}
 //    Lender
 // Nachricht empfangen (von Client A)
 socket.onmessage = function (event) {

@@ -150,15 +150,15 @@ document.addEventListener('DOMContentLoaded', function () {
     db.collection('items').get().then(items => {
         if (items.length > 0) {
             let filteredData = items.filter(item => item.id === Number(itemId));
-            let contractData = (filteredData[0].contract) ? 'Vorhandener Contract: <strong>' + filteredData[0].contract + '</strong>': 'Jetzt Verleihbar.';
-            
-            
+            let contractData = (filteredData[0].contract) ? 'Vorhandener Contract: <strong>' + filteredData[0].contract + '</strong>' : 'Jetzt Verleihbar.';
+
+
             db.collection('contracts').doc({ contractid: filteredData[0].contract }).get().then(contract => {
                 document.getElementById('lenderData').innerHTML = contract.lender;
                 document.getElementById('contractDate').innerHTML = contract.datum;
                 document.getElementById('startsharing').disabled = true;
             }).catch(err => { console.log("No Contract found."); });
-            
+
             document.getElementById('itemDetails').innerHTML = `<div id="details"><p>Eigentümer: ${filteredData[0].owner}</p>
              <img src="${filteredData[0].image}" />
              <p>${filteredData[0].name}</p>
@@ -167,11 +167,11 @@ document.addEventListener('DOMContentLoaded', function () {
              <p id="contractDate"></p>
             
              <div id="stepper">
-             <button id="returnsharing" onClick="document.getElementById('return').scrollIntoView()">Einfordern</button> <button id="startsharing" onClick="document.getElementById('step1').scrollIntoView()">Veleihen</button>
+             <button id="returnsharing" onClick="document.getElementById('return').scrollIntoView()">Einfordern</button> <button id="startsharing" onClick="document.getElementById('step1').scrollIntoView()">Veleihen</button> <button onClick="window.location.href='/lending/?returnId=${filteredData[0].contract}'">Zurückgeben</button>
              </div>
              </div>`;
 
-             if ( filteredData[0].contract === undefined) {
+            if (filteredData[0].contract === undefined) {
                 document.getElementById('returnsharing').disabled = true;
             }
             itemtotransfer = filteredData;
@@ -210,12 +210,12 @@ document.getElementById('push').addEventListener('click', (event) => {
     // WebSocket-Verbindung zu Server herstellen mit temporärer eindeutiger saveID
     const socket = new WebSocket(websocketURL + urlToAPI + '/?saveID=' + shuffledToken);
 
-    socket.onerror = function(error) {
+    socket.onerror = function (error) {
         console.error('WebSocket Fehler:', error);
         alert('Verbindungsfehler aufgetreten. Bitte versuchen Sie es später erneut.');
     };
 
-    socket.onclose = function(event) {
+    socket.onclose = function (event) {
         console.log('WebSocket-Verbindung geschlossen:', event.code, event.reason);
         document.getElementById('receivedMessage').innerHTML = 'Verbindung unterbrochen. Bitte Seite neu laden.';
     };
@@ -229,12 +229,14 @@ document.getElementById('push').addEventListener('click', (event) => {
     socket.onmessage = function (event) {
         try {
             let jsonObject = JSON.parse(event.data);
-            
+
             if (!jsonObject || !jsonObject.type) {
                 throw new Error('Ungültiges Nachrichtenformat');
             }
 
-            switch(jsonObject.type) {
+            const receivedMessageElement = document.getElementById('receivedMessage');
+            
+            switch (jsonObject.type) {
                 case "lender":
                     if (!jsonObject.msg) {
                         throw new Error('Fehlende Lender-Informationen');
@@ -252,6 +254,19 @@ document.getElementById('push').addEventListener('click', (event) => {
                     templenderId = jsonObject.msg;
                     document.getElementById('sharingButton').disabled = false;
                     document.getElementById("step3").scrollIntoView({ behavior: 'smooth' });
+                    break;
+
+                case "return":
+                    console.log('Rückgabeanforderung erhalten:', jsonObject.msg);
+                    receivedMessageElement.innerHTML = `
+                        <div class="message-box">
+                            <h3>🔄 Rückgabeanforderung eingegangen</h3>
+                            <p>Contract ID: <strong>${escapeHtml(jsonObject.msg)}</strong></p>
+                            <p>Zeitpunkt: ${new Date().toLocaleString()}</p>
+                        </div>
+                    `;
+                    receivedMessageElement.classList.add('active');
+                    receivedMessageElement.scrollIntoView({ behavior: 'smooth' });
                     break;
 
                 default:
@@ -307,7 +322,7 @@ document.getElementById('push').addEventListener('click', (event) => {
 
 
 
-    document.getElementById('item').innerHTML = '<a href="'+window.location.origin+'/lending/?id=' + itemId + '&saveID=' + shuffledToken + '" target="_blank">Link zum Browsertab</a>';
+    document.getElementById('item').innerHTML = '<a href="' + window.location.origin + '/lending/?id=' + itemId + '&saveID=' + shuffledToken + '" target="_blank">Link zum Browsertab</a>';
     // const apiUrl = `http://${urlToAPI}/api/postSaveItem?tempsaveID=${shuffledToken}`;
     // fetch(apiUrl)
     //     .then(response => {
@@ -340,11 +355,31 @@ function generateQRCode(itemId) {
     // qrcodeContainer.style.display = 'block';
 }
 // Event-Listener für den "Item zurückfordern" Button
-document.getElementById('returnButton').addEventListener('click', function() {
+document.getElementById('returnButton').addEventListener('click', function () {
 
+   
     // Funktion zum Abrufen der Vertragsinformationen und Senden des Webhooks
     db.collection('items').doc({ id: Number(itemId) }).get().then(item => {
         if (item && item.contract) {
+
+            const socket = new WebSocket(websocketURL + urlToAPI + '/?saveID=' + item.contract);
+            socket.onmessage = function (event) {
+                console.log('Rückgabeanforderung erhalten:', event.data);
+
+
+                const receivedMessageElement = document.getElementById('receivedMessage');
+
+                receivedMessageElement.innerHTML = `
+                        <div class="message-box">
+                            <h3>🔄 Rückgabeanforderung eingegangen</h3>
+                            <p>Contract ID: <strong>${escapeHtml(event.data)}</strong></p>
+                            <p>Zeitpunkt: ${new Date().toLocaleString()}</p>
+                        </div>
+                    `;
+                    receivedMessageElement.classList.add('active');
+                    receivedMessageElement.scrollIntoView({ behavior: 'smooth' });
+            };
+
             return db.collection('contracts').doc({ contractid: item.contract }).get();
         } else {
             throw new Error('Item nicht gefunden oder hat keinen Vertrag');
@@ -355,7 +390,7 @@ document.getElementById('returnButton').addEventListener('click', function() {
             const userId = contract.lenderId;
             const itemName = contract.itemName;
             const message = "Bitte Zurückgeben"; // `Bitte das Item "${itemName}" mit der Vertragsnummer ${contractId} bald zurückgeben. Überprüfen Sie den Status in Ihrer fljota.network Item-Liste.`;
-            
+
             // Webhook aufrufen
             fetch(`https://app.fljota.network/sendToUser?userId=${encodeURIComponent(userId)}&message=${encodeURIComponent(message)}`)
                 .then(response => {
@@ -366,7 +401,7 @@ document.getElementById('returnButton').addEventListener('click', function() {
                 })
                 .then(data => {
                     console.log('Webhook erfolgreich aufgerufen:', data);
-                  })
+                })
                 .catch(error => {
                     console.error('Fehler beim Aufrufen des Webhooks:', error);
                     alert('Es gab einen Fehler beim Senden der Rückgabeanfrage.');
@@ -390,7 +425,7 @@ document.getElementById('returnButton').addEventListener('click', function() {
     //         const message = `Bitte das Item mit dem Namen ${itemName} und der Vertragsnummer ${contractId}, das am ${currentDate} verliehen wurde, wieder bald zurückgeben. Bitte prüfe in deiner fljota.network Item Liste, den Status des Verleihs.`;
     //         const encodedMessage = encodeURIComponent(message);
     //         const whatsappUrl = `https://wa.me/?text=${encodedMessage}`;
-            
+
     //         // Öffne WhatsApp mit der vordefinierten Nachricht
     //         window.open(whatsappUrl, '_blank');
     //     } else {
