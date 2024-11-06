@@ -419,7 +419,7 @@ input[type="file"] {
   
 }
 
-#step3 {
+#step3, #returnstep2 {
   background-color: lightgray;
   height: 100vh;
   scroll-snap-type: y mandatory;

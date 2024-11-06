@@ -72,11 +72,19 @@ Anschließend kannst du den Contract in deiner Liste einsehen.</p>
 Dein Item ist bereits entliehen? Fordere es jetzt wieder ein.
 <button id="returnButton">Item zurückfordern</button>
 </div>
-<br />
-<button id="deleteButton" class="button button-outline">Unwiderruflich löschen</button>
+
+<div id="returnstep2">
 
 <p id="receivedMessage">Warten auf Nachricht...</p>
     <pre id="messages"></pre>
+
+    <button id="returnagree">Rückgabe bestätigen</button>
+
+</div>
+<br />
+<button id="deleteButton" class="button button-outline">Unwiderruflich löschen</button>
+
+
     
 
     
@@ -157,6 +165,14 @@ document.addEventListener('DOMContentLoaded', function () {
                 document.getElementById('lenderData').innerHTML = contract.lender;
                 document.getElementById('contractDate').innerHTML = contract.datum;
                 document.getElementById('startsharing').disabled = true;
+
+                // Neue Prüfung hinzufügen: Deaktivieren des Einfordern-Buttons, wenn der Lender der aktuelle Benutzer ist
+                const currentUser = localStorage.getItem('userName');
+                console.log('Current User:', currentUser); // Debugging
+                console.log('Contract Lender:', contract.lender); // Debugging
+                if (contract.lender === currentUser) {
+                    document.getElementById('returnsharing').disabled = true; // Button inaktiv schalten
+                }
             }).catch(err => { console.log("No Contract found."); });
 
             document.getElementById('itemDetails').innerHTML = `<div id="details"><p>Eigentümer: ${filteredData[0].owner}</p>
@@ -167,9 +183,19 @@ document.addEventListener('DOMContentLoaded', function () {
              <p id="contractDate"></p>
             
              <div id="stepper">
-             <button id="returnsharing" onClick="document.getElementById('return').scrollIntoView()">Einfordern</button> <button id="startsharing" onClick="document.getElementById('step1').scrollIntoView()">Veleihen</button> <button onClick="window.location.href='/lending/?returnId=${filteredData[0].contract}'">Zurückgeben</button>
+             <button id="returnsharing" onClick="document.getElementById('return').scrollIntoView()">Einfordern</button> 
+             <button id="startsharing" onClick="document.getElementById('step1').scrollIntoView()">Verleihen</button> 
+             <button id="returnButton"  onClick="window.location.href='/lending/?returnId=${filteredData[0].contract}'">Zurückgeben</button>
              </div>
              </div>`;
+
+            // Prüfung des Eigentümers
+            const currentUser = localStorage.getItem('userName');
+            console.log('Current User:', currentUser); // Debugging
+            console.log('Item Owner:', filteredData[0].owner); // Debugging
+            if (filteredData[0].owner === currentUser) {
+                document.getElementById('returnButton').disabled = true; // Button inaktiv schalten
+            }
 
             if (filteredData[0].contract === undefined) {
                 document.getElementById('returnsharing').disabled = true;
