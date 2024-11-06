@@ -10,9 +10,10 @@ import fn_loader from '/assets/fn_loader.svg'
 import undraw_shared_goals from '/assets/undraw_shared_goals.svg'
 
 
-const urlToAPI = 'localhost:8080';
-const websocketURL = 'ws://';
-// const urlToAPI = 'handshake.fljota.network';
+const UMGEBUNG = 'dev';
+
+const urlToAPI = UMGEBUNG === 'dev' ? 'localhost:8080' : 'handshake.fljota.network';
+const websocketURL = UMGEBUNG === 'dev' ? 'ws://' : 'wss://';
 // WSS Support on Plesk only with deactivated Proxy Mode:
 // https://www.plesk.com/kb/support/does-node-js-on-plesk-support-websockets-socket-io/
 

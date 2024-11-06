@@ -7,10 +7,10 @@ import { generateShuffledToken } from "/modules/shuffledtoken.js"
 import { sendItemToLender, websocketFeedback } from "/modules/ws_connect.js"
 import { blobToJson, getCurrentDateTime } from '/modules/helper.js'
 
+const UMGEBUNG = 'dev';
 
-const urlToAPI = 'localhost:8080';
-// const urlToAPI = 'handshake.fljota.network';
-const websocketURL = 'ws://';
+const urlToAPI = UMGEBUNG === 'dev' ? 'localhost:8080' : 'handshake.fljota.network';
+const websocketURL = UMGEBUNG === 'dev' ? 'ws://' : 'wss://';
 // WSS Support on Plesk only with deactivated Proxy Mode:
 // https://www.plesk.com/kb/support/does-node-js-on-plesk-support-websockets-socket-io/
 
