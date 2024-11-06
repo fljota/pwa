@@ -416,7 +416,7 @@ document.getElementById('returnButton').addEventListener('click', function () {
             const contractId = contract.contractid;
             const userId = contract.lenderId;
             const itemName = contract.itemName;
-            const message = "Bitte Zurückgeben"; // `Bitte das Item "${itemName}" mit der Vertragsnummer ${contractId} bald zurückgeben. Überprüfen Sie den Status in Ihrer fljota.network Item-Liste.`;
+            const message = `Bitte das Item "${itemName}" mit der Vertragsnummer ${contractId} bald zurückgeben. Überprüfen Sie den Status in Ihrer fljota.network Item-Liste.`;
 
             // Webhook aufrufen
             fetch(`https://app.fljota.network/sendToUser?userId=${encodeURIComponent(userId)}&message=${encodeURIComponent(message)}`)
