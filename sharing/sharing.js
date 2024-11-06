@@ -220,6 +220,8 @@ document.getElementById('deleteButton').addEventListener('click', () => {
 let templenderuser;
 let tempcontractid;
 let templenderId;
+let socket;
+
 
 
 // PUSH Events zur Websocket Verbindung und Socket Rückmeldung
@@ -365,6 +367,8 @@ document.getElementById('push').addEventListener('click', (event) => {
     //         websocketFeedback(shuffledToken);
     //     })
     //     .catch(error => console.error('Fehler beim Abrufen der Daten:', error));
+
+    
 });
 
 function generateQRCode(itemId) {
@@ -389,7 +393,7 @@ document.getElementById('returnButton').addEventListener('click', function () {
     db.collection('items').doc({ id: Number(itemId) }).get().then(item => {
         if (item && item.contract) {
 
-            const socket = new WebSocket(websocketURL + urlToAPI + '/?saveID=' + item.contract);
+            socket = new WebSocket(websocketURL + urlToAPI + '/?saveID=' + item.contract);
             socket.onmessage = function (event) {
                 console.log('Rückgabeanforderung erhalten:', event.data);
 
@@ -463,6 +467,23 @@ document.getElementById('returnButton').addEventListener('click', function () {
     //     console.error('Fehler beim Abrufen des Items:', error);
     //     alert('Es gab einen Fehler beim Abrufen der Item-Informationen.');
     // });
+});
+
+document.getElementById('returnstep2').addEventListener('click', () => {
+    // Hier wird die Nachricht an den Lender gesendet
+    const message = {
+        targetId:  itemtotransfer[0].contract + 'lender',
+        type: 'return',
+        msg: 'Rückgabeanforderung für Contract ID: ' + itemtotransfer[0].contract // Beispielnachricht
+    };
+
+    // Überprüfen, ob der WebSocket offen ist, bevor Sie die Nachricht senden
+    if (socket && socket.readyState === WebSocket.OPEN) {
+        socket.send(JSON.stringify(message));
+        console.log('Nachricht an Lender gesendet:', message);
+    } else {
+        console.error('WebSocket ist nicht offen. Nachricht konnte nicht gesendet werden.');
+    }
 });
 
 function escapeHtml(unsafe) {

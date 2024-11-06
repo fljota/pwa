@@ -56,6 +56,12 @@ if (itemId || returnId) {
 <button id="return1">Item zurückgeben</button>
 </div>
 
+<div id="returnstep2">
+<h1>Rückgabe bestätigen</h1>
+<p>Ich gebe das Item wieder zurück.</p>
+<button id="return2">Item zurückgeben</button>
+</div>
+
 <dialog>
 <p>Für den Verleih vorbereiten</p>
 Vorname <input></input>
@@ -170,6 +176,8 @@ if (returnId) {
 // Nachricht empfangen (von Client A)
 socket.onmessage = function (event) {
     let msgfromowner = JSON.parse(event.data);
+
+    console.log(msgfromowner);
     
     if (msgfromowner.type === "details") {
         document.getElementById("step2").scrollIntoView({ behavior: 'smooth' });
@@ -179,6 +187,10 @@ socket.onmessage = function (event) {
         tempitemtosave = msgfromowner.msg[0];
         document.getElementById('okMesssage').disabled = false;
 
+    }
+    if (msgfromowner.type === "return") {
+        console.log(msgfromowner.msg);
+        document.getElementById("returnstep2").scrollIntoView({ behavior: 'smooth' });
     }
 
     document.getElementById('receivedMessage').innerText += msgfromowner;
